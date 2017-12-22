@@ -1,0 +1,33 @@
+#python3
+#find phone numbers and email addresses
+import re
+phno=re.compile(r'''(
+(\d{3}|\(\d{3}\))?
+(\s|-|\.)?
+(\d{3})
+(\s|-|\.)
+(\d{4})
+)''',re.VERBOSE)
+email=re.compile(r'''(
+[a-zA-Z0-9_.%-+]+
+@
+[a-zA-Z0-9.-]+
+\.
+[a-zA-Z]{2,4}
+)''',re.VERBOSE)
+print('Enter the text to be checked')
+t=input()
+numbers=[]
+for groups in phno.findall(t):
+    num='-'.join([groups[1],groups[3],groups[5]])
+    numbers.append(num)
+emails=[]
+for groups in email.findall(t):
+    emails.append(groups)
+if ((len(numbers)+len(emails))>0):
+    print('The numbers found are ')
+    print(numbers)
+    print('The emails found are ')
+    print(emails)
+else:
+    print('Nothing found')
